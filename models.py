@@ -34,12 +34,12 @@ class NearestStore(BaseModel):
     distance = DecimalField(help_text='Distance between city and nearest store in a straight line in kilometers')
 
 
-def clear_db():
+def clear_db() -> None:
     with database:
         database.drop_tables([NearestStore, Cities])
 
 
-def init_db():
+def init_db() -> None:
     with database:
         database.create_tables([NearestStore, Cities])
 

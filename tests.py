@@ -15,7 +15,7 @@ MODELS = [Cities, NearestStore]
 in_mem_db = SqliteDatabase(':memory:')
 
 
-def create_some_cities():
+def create_some_cities() -> None:
     rows = [
         (1, 'Andorra la Vella', 488, '07', 6, 'AD', Decimal('42.50779'), Decimal('1.52109'),
          datetime.fromisoformat('2019-10-05 23:58:06'), datetime.fromisoformat('2019-10-05 23:58:06'), 1, 'Q1863'),

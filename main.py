@@ -16,7 +16,7 @@ def init_argparse() -> argparse.ArgumentParser:
     return parser
 
 
-async def main(cities):
+async def main(cities: list) -> None:
     tasks = [distance_to_nearest_shop(city) for city in db_cities_paginated_iterator(cities)]
 
     rows = await asyncio.gather(*tasks)
