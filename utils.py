@@ -3,7 +3,8 @@ from collections import namedtuple
 
 from peewee import ModelSelect
 
-from models import Cities
+from logger import logger
+from models import Cities, NearestStore
 import store_locator
 
 Point = namedtuple('Point', ['x', 'y'])
@@ -28,7 +29,11 @@ async def distance_to_nearest_shop(city: Cities) -> tuple:
     city_point = Point(float(city.longitude), float(city.latitude))
 
     nearest_store = await locate_nearest_store(city_point)
+    logger.info(f'Calculating distance from {city.name} to store: {nearest_store["store_id"]}')
 
     distance = calculate_distance(city_point, Point(nearest_store['latitude'], nearest_store['longitude']))
 
-    return city.id, nearest_store['store_id'], distance
+    model = NearestStore.get_or_create(city_id=city.id, store_id=nearest_store['store_id'])[0]
+    model.distance = distance
+
+    return model

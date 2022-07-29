@@ -31,7 +31,10 @@ class Cities(BaseModel):
 class NearestStore(BaseModel):
     city_id = ForeignKeyField(Cities)
     store_id = IntegerField()
-    distance = DecimalField(help_text='Distance between city and nearest store in a straight line in kilometers')
+    distance = DecimalField(
+        help_text='Distance between city and nearest store in a straight line in kilometers',
+        default=0
+    )
 
 
 def clear_db() -> None:

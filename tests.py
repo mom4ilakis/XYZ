@@ -75,8 +75,6 @@ class MyTestCase(unittest.IsolatedAsyncioTestCase):
 
             create_some_cities()
 
-            print("Coroutine test")
-
             targets = (['Encamp', 'Ordino', 'Arinsal'], [5, 6, 2])
 
             await main(targets[0])
